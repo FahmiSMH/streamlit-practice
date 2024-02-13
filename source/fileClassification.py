@@ -1,3 +1,8 @@
 import os
-import PyPDF2
+from PyPDF2 import PdfReader
 
+def reader(filename):
+
+    document = PdfReader(filename)
+    document = document.ex
+    return document
