@@ -7,6 +7,7 @@ def fileSelector(folder_path='.'):
     return os.path.join(folder_path, selectedFileName)
 
 def getEveryFile():
+    
     return
 
 def test():
