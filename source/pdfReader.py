@@ -1,6 +1,6 @@
 import PyPDF2
 # Import the libraries
-import pytesseract
+import pytesseract as pt
 import pdf2image
 from PIL import Image
 
@@ -20,19 +20,23 @@ def pdf2reader(filename):
 
 def ocrReader(filename):
     # Specify the path to the PDF file
-    pdf_file = "sample.pdf"
-    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
-    num_pages = pdf_reader.numPages
+    text=""
+    ocrReader = PyPDF2.PdfReader(filename)
+    images = pdf2image.pdfinfo_from_path(filename)
+ 
+    for i in range(len(images)):
+        # Save pages as images in the pdf
+        images[i].save('page'+ str(i) +'.jpg', 'JPEG')
 
-    # Loop through each page
-    for page in range(num_pages):
-
-        pdf_page = pdf_reader.getPage(page)
-        pdf_image = pdf2image.convert_from_bytes(pdf_page.extractBytes())[0]
-        pdf_image.save(f"page_{page}.png")
-        image = Image.open(f"page_{page}.png")
-        text = pytesseract.image_to_string(image)
-        print(text)
-        with open("output.txt", "a") as f:
-            f.write(text + "\n")
+    for i in images:
+        text += pt.image_to_string(i)
+        print("text")
     return text
+
+def test():
+    file = "dataset/Policy Update.pdf"
+    ocrReader(file)
+    return
+
+if __name__=="__main__":
+    test()

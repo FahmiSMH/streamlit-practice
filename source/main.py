@@ -4,6 +4,10 @@ import pdfReader
 
 st.title("Project Paperclip")
 #maybe time for some changes
+def folderSelection():
+    st.write("Browse for dataset folder")
+    return
+
 def main():
     file = "dataset/Policy Update.pdf"
     menu = ['','1 Born PDF','2 Scanned PDF', '3 ScannedByOCR']
