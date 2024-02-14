@@ -1,5 +1,5 @@
 import streamlit as st
-import fileSelector as fs
+import fileSelector 
 import pdfReader
 
 st.title("Project Paperclip")
@@ -21,7 +21,7 @@ def main():
             case '2 Scanned PDF':
                 document = pdfReader.ocrReader(file)
                 st.write(document)
-            case '3 ScannedbyOCR':
+            case '3 ScannedByOCR':
                 document = pdfReader.pdf2reader(file)
                 st.write(document)
     return
