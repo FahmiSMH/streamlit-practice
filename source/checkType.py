@@ -10,19 +10,24 @@ def checkFile(file):
         #ext = Path('my_file.mp3').suffix
         # Now we can simply use == to check for equality, no need for wildcards.
         if ext == ".pdf":
-            print (fp, "is a pdf!")
-            copyFile(fp, "pdf")
-        elif ext == ".xlsx":
-            print (fp, "is an excel file!")
+            #print (fp, "is a pdf!")
+            moveFile(fp, "pdf")
+        elif ext == ".xlsx" | ".csv":
+            #print (fp, "is an excel file!")
+            moveFile(fp, "sheet")
+        elif ext == ".docx" | ".rtf":
+            moveFile(fp, "doc")
+        elif ext == ".jpeg" | ".png" | ".jpg" | ".gdoc":
+            moveFile(fp, "images")
         else:
-            print (fp, "is an unknown file format.")
+            print(fp, "is an unknown file format.")
     return ext
 
-def copyFile(file, destination):
+def moveFile(file, destination):
     destination = "dataset/" + destination
     try:
         #change to shutil.move to move files
-        shutil.copy(file, destination)
+        shutil.move(file, destination)
         print(f"File {file} copied successfully.")
     except IOError as e:
         print(f"Unable to copy file {file}. Error: {e}")
@@ -30,8 +35,7 @@ def copyFile(file, destination):
         print(f"Unexpected error occurred while copying file {file}.")
     return
 
-def test():
-    file = ["dataset/Policy Update.pdf"]
+def test(file):
     checkFile(file)
     return
 

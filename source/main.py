@@ -1,23 +1,23 @@
 import streamlit as st
-import fileSelector 
+import fileSelector as fs
+import checkType as ct
 import pdfReader
-
 st.title("Project Paperclip")
 #maybe time for some changes
-def folderSelection():
-    st.write("Browse for dataset folder")
-    return
-
-def main():
-    file = "dataset/Policy Update.pdf"
+def pdfOption(file):
     menu = ['','1 Born PDF','2 Scanned PDF', '3 ScannedByOCR']
+    document = []
     option = st.selectbox("Select PDF Properties", menu)
     if st.button("Confirm"):
         match option:
             case '1 Born PDF':
-                document = pdfReader.pdf2reader(file)
-                #Ready to delete this when handling multiple files
-                st.write(document)
+                for f in file: 
+                    document.append(pdfReader.pdf2reader(f))
+                    #should we save this somewhere?
+                    #and iterate it later?
+                    #st.write(document)
+                    #Ready to delete this when handling multiple files
+                st.write("Done Reading")
             case '2 Scanned PDF':
                 document = pdfReader.ocrReader(file)
                 st.write(document)
@@ -25,6 +25,20 @@ def main():
                 document = pdfReader.pdf2reader(file)
                 st.write(document)
     return
+
+def sheetOption():
+    return
+
+def main():
+    file = fs.getEveryFile("dataset")
+    ct.test(file)
+    #get every pdf
+    file = []
+    file = fs.getEveryFile("dataset/pdf")
+    print(file)
+    pdfOption(file)
+    return
+    
 
 if __name__ == "__main__":
     main()
