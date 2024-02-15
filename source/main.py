@@ -30,11 +30,11 @@ def sheetOption():
     return
 
 def main():
-    file = fs.getEveryFile("dataset")
+    file = fs.getEveryFile("data")
     ct.test(file)
     #get every pdf
     file = []
-    file = fs.getEveryFile("dataset/pdf")
+    file = fs.getEveryFile("data/pdf")
     print(file)
     pdfOption(file)
     return

@@ -24,7 +24,7 @@ def checkFile(file):
     return ext
 
 def moveFile(file, destination):
-    destination = "dataset/" + destination
+    destination = "data/" + destination
     try:
         #change to shutil.move to move files
         shutil.move(file, destination)
