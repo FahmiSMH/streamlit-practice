@@ -2,6 +2,7 @@ import streamlit as st
 import fileSelector as fs
 import checkType as ct
 import pdfReader
+
 st.title("Project Paperclip")
 #maybe time for some changes
 def pdfOption(file):
