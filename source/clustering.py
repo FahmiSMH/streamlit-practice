@@ -9,7 +9,7 @@ import scipy
 import streamlit as st
 import plotly.express as px
 
-def main():
+def test():
     # Sample TF-IDF data (replace with your actual data)
     data = [
         "document 1", "document 2", "document 3", "document 4",
@@ -22,7 +22,7 @@ def main():
         "word3": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         # ... more words and documents
     })
-    #pca(data)
+    pca(data)
     
 def pca(data):
 
@@ -126,5 +126,5 @@ def normalized(data):
     return
 
 if __name__ == "__main__":
-    main()
+    test()
     
