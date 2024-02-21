@@ -7,6 +7,7 @@ from sklearn.preprocessing import normalize
 from contextlib import redirect_stdout
 import scipy
 import streamlit as st
+import plotly.express as px
 
 def main():
     # Sample TF-IDF data (replace with your actual data)
@@ -50,11 +51,19 @@ def pca(data):
             with redirect_stdout(file):
                 scipy.io.mmwrite("tfidf.txt", tfidf_matrix)
     # Visualize clusters
-    plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=kmeans.labels_)
-    plt.title("K-Means Clustering Visualization (PCA)")
-    plt.xlabel("Principal Component 1")
-    plt.ylabel("Principal Component 2")
-    plt.show()
+    # plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=kmeans.labels_)
+    # plt.title("K-Means Clustering Visualization (PCA)")
+    # plt.xlabel("Principal Component 1")
+    # plt.ylabel("Principal Component 2")
+    # plt.show()
+
+    fig = px.scatter(x=reduced_data[:, 0], y=reduced_data[:, 1], color=kmeans.labels_)
+    fig.update_layout(
+        title="K-Means Clustering Visualization (PCA)",
+        xaxis_title="Principal Component 1",
+        yaxis_title="Principal Component 2"
+    )
+    st.plotly_chart(fig)      
     return kmeans.labels_
 
 def normalized(data):
@@ -90,13 +99,21 @@ def normalized(data):
     original_centroids = pca.inverse_transform(reduced_centroids)
 
     # Visualize clusters and centroids in original space
-    plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=kmeans.labels_)
-    plt.scatter(original_centroids[:, 0], original_centroids[:, 1], marker='*', c='red', label='Centroids')
-    plt.title("K-Means Clustering Visualization (PCA)")
-    plt.xlabel("Principal Component 1")
-    plt.ylabel("Principal Component 2")
-    plt.legend()
-    plt.show()
+    # plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=kmeans.labels_)
+    # plt.scatter(original_centroids[:, 0], original_centroids[:, 1], marker='*', c='red', label='Centroids')
+    # plt.title("K-Means Clustering Visualization (PCA)")
+    # plt.xlabel("Principal Component 1")
+    # plt.ylabel("Principal Component 2")
+    # plt.legend()
+    # plt.show()
+
+    fig = px.scatter(x=reduced_data[:, 0], y=reduced_data[:, 1], color=kmeans.labels_)
+    fig.update_layout(
+        title="K-Means Clustering Visualization (PCA)",
+        xaxis_title="Principal Component 1",
+        yaxis_title="Principal Component 2"
+    )
+    st.plotly_chart(fig)
 
     # Optional: Visualize centroids in reduced space
     # plt.scatter(original_centroids[:, 0], original_centroids[:, 1], marker='*', c='red', label='Centroids')
