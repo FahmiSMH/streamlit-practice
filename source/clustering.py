@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 from sklearn.preprocessing import normalize
 from contextlib import redirect_stdout
 import scipy
+import streamlit as st
 
 def main():
     # Sample TF-IDF data (replace with your actual data)

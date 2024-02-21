@@ -2,6 +2,9 @@ import streamlit as st
 import fileSelector as fs
 import checkType as ct
 import pdfReader
+import prepro as pp
+import pattern as pt
+from clustering import pca
 
 st.title("Project Paperclip")
 #maybe time for some changes
@@ -27,6 +30,16 @@ def pdfOption(file):
                 for f in file: 
                     document.append(pdfReader.pdf2reader(f))
                 st.write("Done Reading")
+        filename=[]
+        for d in document:
+            string = pp.noSpecial(d)
+            token = pp.tokenize(string)
+            removed = pp.removeWord(token)
+            lemmatized = pp.lemming(removed)
+            dataset = pt.toLowerCase(lemmatized)
+            finalstring = ' '.join(dataset)
+            filename.append(finalstring)
+        cluster = pca(filename)
     return
 
 def sheetOption():
