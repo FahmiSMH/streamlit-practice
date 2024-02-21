@@ -22,18 +22,10 @@ def pdfOption(file):
             case '2 Scanned PDF':
                 for f in file: 
                     document.append(pdfReader.ocrReader(f))
-                    #should we save this somewhere?
-                    #and iterate it later?
-                    #Ready to delete this when handling multiple files
-                #st.write(document)
                 st.write("Done Reading")
             case '3 ScannedByOCR':
                 for f in file: 
                     document.append(pdfReader.pdf2reader(f))
-                    #should we save this somewhere?
-                    #and iterate it later?
-                    #st.write(document)
-                    #Ready to delete this when handling multiple files
                 st.write("Done Reading")
     return
 
