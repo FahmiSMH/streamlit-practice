@@ -5,7 +5,7 @@ import pdfReader
 import prepro as pp
 import pattern as pt
 from clustering import pca
-
+from foldering import fileClusterDisplay
 st.title("Project Paperclip")
 #maybe time for some changes
 def pdfOption(file):
@@ -40,6 +40,9 @@ def pdfOption(file):
             finalstring = ' '.join(dataset)
             filename.append(finalstring)
         cluster = pca(filename)
+        
+        fc = fileClusterDisplay(file, cluster)
+        st.table(fc)
     return
 
 def sheetOption():
