@@ -2,7 +2,10 @@ import streamlit as st
 import fileSelector as fs
 import checkType as ct
 import pdfReader
-
+import prepro as pp
+import pattern as pt
+from clustering import pca
+from foldering import fileClusterDisplay
 st.title("Project Paperclip")
 #maybe time for some changes
 def pdfOption(file):
@@ -20,11 +23,26 @@ def pdfOption(file):
                     #Ready to delete this when handling multiple files
                 st.write("Done Reading")
             case '2 Scanned PDF':
-                document = pdfReader.ocrReader(file)
-                st.write(document)
+                for f in file: 
+                    document.append(pdfReader.ocrReader(f))
+                st.write("Done Reading")
             case '3 ScannedByOCR':
-                document = pdfReader.pdf2reader(file)
-                st.write(document)
+                for f in file: 
+                    document.append(pdfReader.pdf2reader(f))
+                st.write("Done Reading")
+        filename=[]
+        for d in document:
+            string = pp.noSpecial(d)
+            token = pp.tokenize(string)
+            removed = pp.removeWord(token)
+            lemmatized = pp.lemming(removed)
+            dataset = pt.toLowerCase(lemmatized)
+            finalstring = ' '.join(dataset)
+            filename.append(finalstring)
+        cluster = pca(filename)
+        
+        fc = fileClusterDisplay(file, cluster)
+        st.table(fc)
     return
 
 def sheetOption():

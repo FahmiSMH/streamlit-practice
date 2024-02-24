@@ -2,6 +2,7 @@ import PyPDF2
 # Import the libraries
 import pytesseract as pt
 import fitz #PymuPDf
+import os
 
 def pdf2reader(filename):
     #initialize
@@ -23,11 +24,13 @@ def ocrReader(filename):
     file_path = filename  # replace with your file path
     doc = fitz.open(file_path)  # open document
 
+    os.makedirs("images", exist_ok=True)
     for i, page in enumerate(doc):
         pix = page.get_pixmap()  # render page to an image
-        pix.save(f"page_{i}.png")  # save image
+        image_path = os.path.join("images", f"page_{i}.png")
+        pix.save(image_path)  # save image
 
-        text += pt.image_to_string(f"page_{i}.png")
+        text += pt.image_to_string(image_path)
         
     return text
 
