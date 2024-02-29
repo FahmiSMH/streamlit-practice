@@ -1,12 +1,13 @@
+import pdfReader
 import streamlit as st
 import fileSelector as fs
 import checkType as ct
-import pdfReader
 import prepro as pp
 import pattern as pt
 from clustering import pca
 from foldering import fileClusterDisplay
 import pandas as pd
+
 st.title("Project Paperclip")
 #maybe time for some changes
 def pdfOption(file):
