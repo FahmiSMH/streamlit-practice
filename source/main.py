@@ -6,6 +6,7 @@ import prepro as pp
 import pattern as pt
 from clustering import pca
 from foldering import fileClusterDisplay
+import pandas as pd
 st.title("Project Paperclip")
 #maybe time for some changes
 def pdfOption(file):
@@ -42,7 +43,9 @@ def pdfOption(file):
         cluster = pca(filename)
         
         fc = fileClusterDisplay(file, cluster)
-        st.table(fc)
+        headers = ["Filename","Cluster"]
+        df = pd.DataFrame(fc, columns=headers)
+        st.table(df)
     return
 
 def sheetOption():
