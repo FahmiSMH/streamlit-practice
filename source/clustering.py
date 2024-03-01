@@ -23,7 +23,7 @@ def test():
         # ... more words and documents
     })
     pca(data)
-    
+
 def pca(data):
 
     # Create TF-IDF vectorizer
@@ -33,8 +33,7 @@ def pca(data):
     tfidf_matrix = vectorizer.fit_transform(data)
 
     # Print TF-IDF matrix
-    #print(tfidf_matrix.toarray())
-    
+    # print(tfidf_matrix.toarray())
 
     # Create and fit K-Means model
     num_clusters = 2
@@ -44,8 +43,8 @@ def pca(data):
     # Reduce dimensions for visualization (optional)
     pca = PCA(n_components=2, svd_solver="arpack")
     reduced_data = pca.fit_transform(tfidf_matrix)
-    
-    #printing tfidf to a file
+
+    # printing tfidf to a file
     with pd.option_context("display.max_rows", None):
         with open("tfidf.txt", "w") as file:
             with redirect_stdout(file):
@@ -63,7 +62,7 @@ def pca(data):
         xaxis_title="Principal Component 1",
         yaxis_title="Principal Component 2"
     )
-    st.plotly_chart(fig)      
+    st.plotly_chart(fig)
     return kmeans.labels_
 
 def normalized(data):
@@ -74,7 +73,7 @@ def normalized(data):
     # Create TF-IDF matrix
     tfidf_matrix = vectorizer.fit_transform(data)
 
-    #normalize
+    # normalize
     normalized_tfidf_matrix = normalize(tfidf_matrix, axis=0, norm='l2')
 
     tfidf_matrix = normalized_tfidf_matrix
@@ -88,7 +87,8 @@ def normalized(data):
     kmeans.fit(tfidf_matrix)
 
     # Reduce dimensions for visualization (optional)
-    pca = PCA(n_components=2, svd_solver="arpack")  # Explicit solver for sparse data
+    # Explicit solver for sparse data
+    pca = PCA(n_components=2, svd_solver="arpack")
     reduced_data = pca.fit_transform(tfidf_matrix)
     print(tfidf_matrix)
 
@@ -106,7 +106,6 @@ def normalized(data):
     # plt.ylabel("Principal Component 2")
     # plt.legend()
     # plt.show()
-
     fig = px.scatter(x=reduced_data[:, 0], y=reduced_data[:, 1], color=kmeans.labels_)
     fig.update_layout(
         title="K-Means Clustering Visualization (PCA)",
@@ -114,7 +113,6 @@ def normalized(data):
         yaxis_title="Principal Component 2"
     )
     st.plotly_chart(fig)
-
     # Optional: Visualize centroids in reduced space
     # plt.scatter(original_centroids[:, 0], original_centroids[:, 1], marker='*', c='red', label='Centroids')
     # plt.title("K-Means Centroids in Reduced Space")
@@ -122,9 +120,7 @@ def normalized(data):
     # plt.ylabel("Principal Component 2")
     # plt.legend()
     # plt.show()
-
     return
 
 if __name__ == "__main__":
     test()
-    
