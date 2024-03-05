@@ -1,3 +1,5 @@
 __pycache__/fileSelector.cpython-312.pyc
 __pycache__
 .venv
+credentials.json
+token.json
