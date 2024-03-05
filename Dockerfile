@@ -8,15 +8,12 @@ WORKDIR /app
 COPY . /app
 
 # Install Tesseract OCR
-RUN apt-get update && apt-get install -y tesseract-ocr
-
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
 # Download NLTK resources
-RUN python -m nltk.downloader stopwords
-RUN python -m nltk.downloader wordnet
-
+RUN apt-get update && apt-get install -y tesseract-ocr \
+    && pip install --no-cache-dir -r requirements.txt \
+    && python -m nltk.downloader stopwords \
+    && python -m nltk.downloader wordnet
 
 # Make port 8501 available to the world outside this container
 EXPOSE 8501
