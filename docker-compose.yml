@@ -1,0 +1,6 @@
+version: '1'
+services:
+  your_service:
+    image: paperclip
+    ports:
+      - "8080:8501"
